@@ -5,9 +5,9 @@ import curso.java.alura.modelo.ContaCorrente;
 
 import java.util.ArrayList;
 
-public class Teste {
+public class TesteArrayListGenerics {
     public static void main(String[] args) {
-        ArrayList lista = new ArrayList();
+        ArrayList<Conta> lista = new ArrayList<Conta>();
 
         Conta cc1 = new ContaCorrente(11, 22);
         lista.add(cc1);
@@ -17,7 +17,7 @@ public class Teste {
 
         System.out.println("Tamanho da lista: " + lista.size());
 
-        Conta conta = (Conta) lista.get(0);
+        Conta conta = lista.get(0);
         System.out.println(conta);
         System.out.println(conta.getNumero());
 
@@ -39,8 +39,8 @@ public class Teste {
 
         System.out.println("-".repeat(40));
 
-        for(Object obj : lista){
-            System.out.println(obj);
+        for(Conta cnt : lista){
+            System.out.println(cnt);
         }
 
     }
