@@ -7,6 +7,7 @@ import curso.java.alura.modelo.ContaCorrente;
 import curso.java.alura.modelo.ContaPoupanca;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,20 +51,23 @@ public class TesteOrdenacaoListas {
             System.out.println(conta + " -> " + conta.getTitular().getNome());
         }
 
-        NumeroDaContaComparator comparator = new NumeroDaContaComparator();
-
         System.out.println("-".repeat(13) + " LISTA ORDENADA PELO NUMERO " + "-".repeat(13));
 
-        lista.sort(comparator);
+        lista.sort(new NumeroDaContaComparator());
         for (Conta conta : lista) {
             System.out.println(conta + " -> " + conta.getTitular().getNome());
         }
 
         System.out.println("-".repeat(14) + " LISTA ORDENADA PELO NOME " + "-".repeat(14));
 
-        TitularDaContaComparator titularComparator = new TitularDaContaComparator();
+        lista.sort(new TitularDaContaComparator());
+        for (Conta conta : lista) {
+            System.out.println(conta + " -> " + conta.getTitular().getNome());
+        }
 
-        lista.sort(titularComparator);
+        System.out.println("-".repeat(14) + " LISTA ORDENADA PELO SALDO " + "-".repeat(14));
+
+        Collections.sort(lista);
         for (Conta conta : lista) {
             System.out.println(conta + " -> " + conta.getTitular().getNome());
         }
@@ -75,12 +79,15 @@ public class TesteOrdenacaoListas {
 class NumeroDaContaComparator implements Comparator<Conta> {
     @Override
     public int compare(Conta c1, Conta c2) {
-        if (c1.getNumero() < c2.getNumero()) {
-            return -1;  // Pode retornar qualquer numero negativo.
-        } else if (c1.getNumero() > c2.getNumero()) {
-            return 1;   // Pode retornar qualquer numero positivo.
-        }
-        return 0;
+        return c1.getNumero() - c2.getNumero();
+//      o return acima é a mesma coisa que os ifs abaixo pois: 0-1=-1, 1-0=1 e 1-1=0.
+//        if (c1.getNumero() < c2.getNumero()) {
+//            return -1;  // Pode retornar qualquer numero negativo.
+//        } else if (c1.getNumero() > c2.getNumero()) {
+//            return 1;   // Pode retornar qualquer numero positivo.
+//        }
+//        return 0;
+//       Poderia ser usado também return Integer.compare(c1.getNumero(), c2.getNumero())
     }
 }
 
